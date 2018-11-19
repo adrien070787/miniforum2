@@ -41,8 +41,32 @@ function listsubject() {
 }
 
 function displaysubject() {
-
+    $message = '';
+    if (isset($_GET['id'])) {
+        $subjectManager = new SubjectManager;
+        $subject = $subjectManager->get_subject_by_id($_GET['id']);
+        if (empty($subject)) {
+            throw new Exception('Ce sujet n\'existe pas');
+        } else {
+            $answerManager = new AnswerManager;
+            if (isset($_POST['validate_answer'])) {
+                $affectedLines = $answerManager->addAnswer(nl2br($_POST['reponse']), $_GET['id'], $_SESSION['id']);
+                if ($affectedLines == false) {
+                    throw new Exception('Impossible d\'ajouter la réponse');
+                } else {
+                    $message = '<div class="alert alert-success">Votre réponse a été publiée avec succes</div>';
+                }
+            }
+            $answers = $answerManager->getAnswerByIdSubject($_GET['id']);
+        }
+    } else {
+        throw new Exception('Aucun id de sujet dans l\'url');
+    }
+    include('view/subject.php');
 }
+
+
+
 
 function createsubject() {
 

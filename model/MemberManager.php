@@ -40,4 +40,12 @@ class MemberManager extends Manager
         }
     }
 
+
+    public function get_member_by_id($id_member) {
+        $bdd = $this->dbConnect();
+        $requete = $bdd->prepare('SELECT * FROM member where id = ?');
+        $requete->execute(array($id_member));
+        return $requete->fetch();
+    }
+
 }

@@ -9,15 +9,15 @@ ob_start(); //commence à conserver en mémoire tampon (buffer) ce qui va suivre
         <th>Auteur</th>
     </tr>
     <?php
-
+    $memberManager = new MemberManager;
     while ($sujet = $sujets->fetch()) {
     ?>
 
     <tr>
-        <td><?= $sujet['title'] ?></td>
+        <td><a href="index.php?action=displaysubject&id=<?= $sujet['id'] ?>"><?= $sujet['title'] ?></a></td>
         <td><?= $sujet['question'] ?></td>
         <td><?= $sujet['date'] ?></td>
-        <td><?= $sujet['id_member'] ?></td>
+        <td><?= $memberManager->get_member_by_id($sujet['id_member'])['name'].' '.$memberManager->get_member_by_id($sujet['id_member'])['firstname'] ?></td>
     </tr>
 
     <?php
