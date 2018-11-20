@@ -1,6 +1,13 @@
 <?php
 ob_start(); //commence à conserver en mémoire tampon (buffer) ce qui va suivre
 ?>
+    <br>
+    <?= $message ?>
+    <br>
+    <a href="index.php?action=createsubject" class="btn btn-default">Ajouter un nouveau sujet</a>
+    <br>
+    <br>
+
 <table class="table table-striped">
     <tr>
         <th>Sujet</th>

@@ -21,4 +21,14 @@ class SubjectManager extends Manager
         return $requete->fetch();
     }
 
+
+    public function addSubject($title, $question) {
+        $bdd = $this->dbConnect();
+        $requete = $bdd->prepare('INSERT INTO `subject`(`title`, `date`, `question`, `id_member`) 
+                                VALUES (?,NOW(),?,?)');
+        $requete->execute(array($title, $question, $_SESSION['id']));
+        return $requete;
+    }
+
+
 }

@@ -32,6 +32,17 @@ function listsubject() {
 
    //je créer un objet $subjectManager qui est une instance de la classe SubjectManager
     $subjectManager = new SubjectManager;
+    $message ='';
+
+    if (isset($_POST['addsubject'])) {
+        $affectedLines = $subjectManager->addSubject($_POST['title'], nl2br($_POST['question']));
+        if ($affectedLines == false) {
+            throw new Exception('Impossible d\'ajouter le sujet');
+        } else {
+            $message = '<div class="alert alert-success">Votre sujet a été publiée avec succes</div>';
+        }
+
+    }
 
     /* Je peux à présent utiliser les fonctions public de cette objet, nottamment getSubjects()
      * qui me retourne la requete SQL de tous les sujets de la base de donnée
@@ -42,6 +53,11 @@ function listsubject() {
 
 function displaysubject() {
     $message = '';
+
+    if (isset($_GET['message'])) {
+        $message = '<div class="alert alert-success">Votre réponse a été supprimée avec succes</div>';
+    }
+
     if (isset($_GET['id'])) {
         $subjectManager = new SubjectManager;
         $subject = $subjectManager->get_subject_by_id($_GET['id']);
@@ -49,6 +65,7 @@ function displaysubject() {
             throw new Exception('Ce sujet n\'existe pas');
         } else {
             $answerManager = new AnswerManager;
+
             if (isset($_POST['validate_answer'])) {
                 $affectedLines = $answerManager->addAnswer(nl2br($_POST['reponse']), $_GET['id'], $_SESSION['id']);
                 if ($affectedLines == false) {
@@ -70,7 +87,18 @@ function displaysubject() {
 
 function createsubject() {
 
+    include ('view/subject_view.php');
 
+}
+
+function deleteanswer() {
+    $answerManager = new AnswerManager();
+    $affectedLines = $answerManager->supp_answer($_GET['id_answer']);
+    if ($affectedLines == false) {
+        throw new Exception('Impossible de supprimer cette reponse');
+    } else {
+        header('Location:index.php?action=displaysubject&id='.$_GET['id_subject'].'&message');
+    }
 }
 
 function displaylogin() {

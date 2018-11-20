@@ -23,4 +23,12 @@ class AnswerManager extends Manager
         $requete->execute(array($answer, $id_subject, $id_member));
         return $requete;
     }
+
+    public function supp_answer($id_answer) {
+        $bdd = $this->dbConnect();
+        $requete = $bdd->prepare('DELETE FROM `answer` WHERE `id` = ?');
+        $requete->execute(array($id_answer));
+        return $requete;
+
+    }
 }

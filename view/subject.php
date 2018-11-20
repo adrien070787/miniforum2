@@ -31,7 +31,18 @@ $memberManager = new MemberManager;
                     <div class="post-answer">
                         <div class="post-answer-info">
                             Posté par <img class="img_user" src="public/img/<?= $answer['id_member'] ?>/<?= $memberManager->get_member_by_id($answer['id_member'])['profil_pic'] ?>"> <strong><?= $memberManager->get_member_by_id($answer['id_member'])['name'].' '.$memberManager->get_member_by_id($answer['id_member'])['firstname'] ?></strong>
-                            &nbsp;&nbsp;<br>
+                            <?php
+                            if ($_SESSION['id'] == $answer['id_member']) {
+                                /*echo '<form action="index.php?action=displaysubject&id='.$subject['id'].'" method="POST">
+                                        <input type="hidden" name="id_answer" value="'.$answer['id'].'">
+                                        <button type="submit" name="delete">Supprimer</button>
+                                      </form>';
+                                */
+                                echo '<a href="index.php?action=deleteanswer&id_subject='.$subject['id'].'&id_answer='.$answer['id'].'">Supprimer</a>';
+                            }
+                            ?>
+
+                            <br>
                             <small><?= $answer['date'] ?></small>
                         </div>
                         <div>

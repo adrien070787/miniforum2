@@ -45,6 +45,8 @@ try {
             createsubject();
         } else if ($_GET['action'] == 'displaylogin') {
             displaylogin();
+        } else if ($_GET['action'] == 'deleteanswer') {
+            deleteanswer();
         } else if ($_GET['action'] == 'login') {
             login();
         }
