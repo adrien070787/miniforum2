@@ -42,7 +42,7 @@ try {
         } else if ($_GET['action'] == 'displaysubject') {
             displaysubject();
         } else if ($_GET['action'] == 'createsubject') {
-            createsubject();
+            displayFormSubject();
         } else if ($_GET['action'] == 'displaylogin') {
             displaylogin();
         } else if ($_GET['action'] == 'deleteanswer') {

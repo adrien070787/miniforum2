@@ -103,8 +103,25 @@ function displaysubject() {
 
 
 
-function createsubject() {
+function displayFormSubject() {
 
+    if (isset($_GET['id_subject'])) {
+        $edition = 1;
+
+        $subjectManager = new SubjectManager;
+        $subject = $subjectManager->get_subject_by_id($_GET['id_subject']);
+
+        if (!empty($subject)) {
+            if ($subject['id_member'] != $_SESSION['id']) {
+                throw new Exception('Vous ne pouvez pas modifier ce sujet car ce n\'est pas le votre');
+            }
+        } else {
+            throw new Exception('Ce sujet n\'existe pas');
+        }
+
+    } else {
+        $edition = 0;
+    }
     include ('view/subject_view.php');
 
 }
