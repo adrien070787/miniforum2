@@ -54,6 +54,7 @@ function listsubject() {
 function displaysubject() {
     $message = '';
 
+
     if (isset($_GET['message'])) {
         $message = '<div class="alert alert-success">Votre réponse a été supprimée avec succes</div>';
     }
@@ -65,6 +66,23 @@ function displaysubject() {
             throw new Exception('Ce sujet n\'existe pas');
         } else {
             $answerManager = new AnswerManager;
+
+            if (isset($_POST['modifyanswer'])) {
+                $answer = $answerManager->getAnswerById($_GET['id_answer']);
+
+                if ($answer['id_member']  != $_SESSION['id']) {
+                    throw new Exception('Vous n\'avez pas le droit de modifier ce commentaire');
+                } else {
+
+                    $affectedLines = $answerManager->modif_answer($_GET['id_answer'], $_POST['answer']);
+                    if ($affectedLines == false) {
+                        throw new Exception('Impossible de modifier la réponse');
+                    } else {
+                        $message = '<div class="alert alert-success">Votre réponse a été modifiée avec succes</div>';
+                    }
+
+                }
+            }
 
             if (isset($_POST['validate_answer'])) {
                 $affectedLines = $answerManager->addAnswer(nl2br($_POST['reponse']), $_GET['id'], $_SESSION['id']);
@@ -108,6 +126,22 @@ function displaylogin() {
 
 }
 
+function displayformanswer() {
+
+    if (isset($_GET['id_subject']) && isset($_GET['id_answer'])) {
+        $answerManager = new AnswerManager;
+        $answer = $answerManager->getAnswerById($_GET['id_answer']);
+        if ($answer['id_member'] != $_SESSION['id']) {
+            throw new Exception('Vous n\'avez pas le droit de modifier ce commentaire');
+        }
+        $id_subject = $_GET['id_subject'];
+    } else {
+        throw new Exception('Impossible d\'afficher ce commentaire');
+    }
+
+    include ('view/answer_view.php');
+}
+
 
 function login() {
     if (isset($_POST['login']) && isset($_POST['password'])) {
@@ -133,4 +167,9 @@ function login() {
         include('view/login.php');
     }
 
+}
+
+
+function myacount() {
+    include('view/myacount.php');
 }

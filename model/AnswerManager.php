@@ -31,4 +31,18 @@ class AnswerManager extends Manager
         return $requete;
 
     }
+
+    public function getAnswerById($id_answer) {
+        $bdd = $this->dbConnect();
+        $requete = $bdd->prepare('SELECT * FROM answer WHERE id = ?');
+        $requete->execute(array($id_answer));
+        return $requete->fetch();
+    }
+
+    public function modif_answer($id_answer, $comment) {
+        $bdd = $this->dbConnect();
+        $requete = $bdd->prepare('UPDATE `answer` SET `comment`=? WHERE id = ?');
+        $requete->execute(array($comment, $id_answer));
+        return $requete;
+    }
 }

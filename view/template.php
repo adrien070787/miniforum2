@@ -9,7 +9,17 @@
 
     <body>
         <div class="container">
-            <h1>Forum</h1>
+            <div class="row">
+                <div class="col-md-6">
+                    <h1><a href="index.php">Forum</a></h1>
+                </div>
+                <div class="col-md-6">
+                    <a style="float: right;" href="index.php?deconnexion">Se deconnecter</a>
+                     <span style="float: right;">&nbsp;&nbsp;-&nbsp;&nbsp;</span>
+                    <a style="float: right;" href="index.php?action=myaccount">Mon compte</a>
+                </div>
+            </div>
+
             <?= $content ?>
         </div>
     </body>

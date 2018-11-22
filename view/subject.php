@@ -39,6 +39,7 @@ $memberManager = new MemberManager;
                                       </form>';
                                 */
                                 echo '<a href="index.php?action=deleteanswer&id_subject='.$subject['id'].'&id_answer='.$answer['id'].'">Supprimer</a>';
+                                echo ' - <a href="index.php?action=displayformanswer&id_subject='.$subject['id'].'&id_answer='.$answer['id'].'">Modifier</a>';
                             }
                             ?>
 

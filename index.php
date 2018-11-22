@@ -47,8 +47,12 @@ try {
             displaylogin();
         } else if ($_GET['action'] == 'deleteanswer') {
             deleteanswer();
+        } else if ($_GET['action'] == 'displayformanswer') {
+            displayformanswer();
         } else if ($_GET['action'] == 'login') {
             login();
+        } else if ($_GET['action'] == 'myaccount') {
+            myacount();
         }
 
     } else {
