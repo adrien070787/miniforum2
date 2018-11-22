@@ -41,7 +41,15 @@ function listsubject() {
         } else {
             $message = '<div class="alert alert-success">Votre sujet a été publiée avec succes</div>';
         }
+    }
 
+    if (isset($_POST['editsubject'])) {
+        $affectedLines = $subjectManager->editSubject($_POST['title'], nl2br($_POST['question']), $_POST['id_subject']);
+        if ($affectedLines == false) {
+            throw new Exception('Impossible de mettre à jour le sujet');
+        } else {
+            $message = '<div class="alert alert-success">Votre sujet a été modifié avec succes</div>';
+        }
     }
 
     /* Je peux à présent utiliser les fonctions public de cette objet, nottamment getSubjects()
@@ -107,6 +115,7 @@ function displayFormSubject() {
 
     if (isset($_GET['id_subject'])) {
         $edition = 1;
+        $action = 'editsubject';
 
         $subjectManager = new SubjectManager;
         $subject = $subjectManager->get_subject_by_id($_GET['id_subject']);
@@ -121,6 +130,8 @@ function displayFormSubject() {
 
     } else {
         $edition = 0;
+        $action = 'addsubject';
+        $subject = array('id' =>'', 'title'=>'', 'date'=>'', 'question' => '', 'id_member' => '');
     }
     include ('view/subject_view.php');
 
@@ -188,5 +199,7 @@ function login() {
 
 
 function myacount() {
+    $memberManager = new MemberManager;
+    $member = $memberManager->get_member_by_id($_SESSION['id']);
     include('view/myacount.php');
 }

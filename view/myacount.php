@@ -19,7 +19,7 @@ ob_start();
             <div class="form-group">
                 <label class="col-md-4 control-label" for="nom">Nom</label>
                 <div class="col-md-4">
-                    <input id="nom" name="nom" type="text" placeholder="" class="form-control input-md" required="">
+                    <input value="<?= $member['name'] ?>" id="nom" name="nom" type="text" placeholder="" class="form-control input-md" required="">
 
                 </div>
             </div>
@@ -28,7 +28,7 @@ ob_start();
             <div class="form-group">
                 <label class="col-md-4 control-label" for="prenom">Prenom</label>
                 <div class="col-md-4">
-                    <input id="prenom" name="prenom" type="text" placeholder="" class="form-control input-md" required="">
+                    <input value="<?= $member['firstname'] ?>" id="prenom" name="prenom" type="text" placeholder="" class="form-control input-md" required="">
 
                 </div>
             </div>
@@ -37,7 +37,7 @@ ob_start();
             <div class="form-group">
                 <label class="col-md-4 control-label" for="login">Login</label>
                 <div class="col-md-4">
-                    <input id="login" name="login" type="text" placeholder="" class="form-control input-md" required="">
+                    <input value="<?= $member['login'] ?>" id="login" name="login" type="text" placeholder="" class="form-control input-md" required="">
 
                 </div>
             </div>
@@ -46,7 +46,7 @@ ob_start();
             <div class="form-group">
                 <label class="col-md-4 control-label" for="password">Mot de passe</label>
                 <div class="col-md-4">
-                    <input id="password" name="password" type="password" placeholder="" class="form-control input-md">
+                    <input value="<?= $member['password'] ?>" id="password" name="password" type="password" placeholder="" class="form-control input-md">
 
                 </div>
             </div>

@@ -30,5 +30,12 @@ class SubjectManager extends Manager
         return $requete;
     }
 
+    public function editSubject($title, $question, $id) {
+        $bdd = $this->dbConnect();
+        $requete = $bdd->prepare('UPDATE `subject` SET `title`=?,`question`=? WHERE id = ?');
+        $requete->execute(array($title, $question, $id));
+        return $requete;
+    }
+
 
 }

@@ -8,6 +8,13 @@ $memberManager = new MemberManager;
 
 <h2>Lecture du sujet : <?= $subject['title'] ?></h2>
 <br>
+    <?php
+    if ($_SESSION['id'] == $subject['id_member']) {
+        echo '<a href="index.php?action=createsubject&id_subject='.$subject['id'].'">Modifier le sujet</a>';
+    }
+    ?>
+
+<br>
 <a href="index.php?action=home">Revenir à la liste des sujets</a>
 <br>
 <br>
